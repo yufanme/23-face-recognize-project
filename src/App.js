@@ -32,6 +32,7 @@ function App() {
         imageLink
       )
       .then((response) => {
+        // get all position of face and restore the position data to boxes.
         const regions = response.outputs[0].data.regions;
         const boxes = [];
         regions.forEach((region) => {
@@ -41,6 +42,20 @@ function App() {
           boxes.push(singleBoundingBox);
         });
         setBoundingPositions(boxes);
+        // add one entry to this user.
+        if (response) {
+          fetch("http://localhost:3000/image", {
+            method: "put",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              id: user.id,
+            }),
+          })
+            .then((response) => response.json())
+            .then((count) => {
+              setUser({ ...user, entries: count });
+            });
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -67,7 +82,7 @@ function App() {
       {route === "home" ? (
         <div>
           <Logo />
-          <Rank />
+          <Rank name={user.name} entries={user.entries} />
           <ImageLinkForm onInput={onInput} onButtonSubmit={onButtonSubmit} />
           <FaceRecognition
             imageLink={imageLink}
@@ -75,7 +90,7 @@ function App() {
           />
         </div>
       ) : route === "signin" ? (
-        <Signin onChangeRoute={onChangeRoute} />
+        <Signin onChangeRoute={onChangeRoute} loadUser={loadUser} />
       ) : (
         <Register onChangeRoute={onChangeRoute} loadUser={loadUser} />
       )}

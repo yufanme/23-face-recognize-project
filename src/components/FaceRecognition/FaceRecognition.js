@@ -6,10 +6,11 @@ function FaceRecognition({ imageLink, boundingPositions }) {
     <div className="center ma">
       <div className="absolute mt2">
         <img src={imageLink} alt="" width="500px" height="auto" />
-        {boundingPositions.map((boundingPosition) => {
+        {boundingPositions.map((boundingPosition, index) => {
           return (
             <div
               className="bounding-box"
+              key={index}
               style={{
                 inset: `${boundingPosition.top_row * 100}% ${
                   boundingPosition.right_col * 100

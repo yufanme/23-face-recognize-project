@@ -1,10 +1,10 @@
 import React from "react";
 
-const Rank = () => {
+const Rank = ({ name, entries }) => {
   return (
     <div>
-      <div className="white f3">{"余帆，你的图片人脸个数排名是："}</div>
-      <div className="white f1">{"#1"}</div>
+      <div className="white f3">{`${name}，你使用人脸识别的次数是：`}</div>
+      <div className="white f1">{`#${entries}`}</div>
     </div>
   );
 };

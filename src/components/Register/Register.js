@@ -20,23 +20,25 @@ const Register = ({ onChangeRoute, loadUser }) => {
 
   function onSubmitClick(event) {
     event.preventDefault();
-    fetch("http://localhost:3000/register", {
-      method: "POST",
-      body: JSON.stringify({
-        name: nameBox,
-        email: emailBox,
-        password: passwordBox,
-      }),
-      headers: { "Content-type": "application/json" },
-    })
-      .then((response) => response.json())
-      .then((user) => {
-        if (user) {
-          // trigger loadUser for home page
-          loadUser(user);
-          onChangeRoute("home");
-        }
-      });
+    if (nameBox && emailBox && passwordBox) {
+      fetch("http://localhost:3000/register", {
+        method: "POST",
+        body: JSON.stringify({
+          name: nameBox,
+          email: emailBox,
+          password: passwordBox,
+        }),
+        headers: { "Content-type": "application/json" },
+      })
+        .then((response) => response.json())
+        .then((user) => {
+          if (user) {
+            // trigger loadUser for home page
+            loadUser(user);
+            onChangeRoute("home");
+          }
+        });
+    }
   }
 
   return (
