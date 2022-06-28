@@ -6,8 +6,9 @@ import Rank from "./components/Rank/Rank";
 import FaceRecognition from "./components/FaceRecognition/FaceRecognition";
 import Signin from "./components/Signin/Signin";
 import Register from "./components/Register/Register";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Clarifai from "clarifai";
+// import TsParticles from "./components/TsParticles/TsParticles";
 
 const app = new Clarifai.App({
   apiKey: "583569cd329c42f9ba2d8c275778a27c",
@@ -22,6 +23,14 @@ function App() {
   function onInput(event) {
     setBoundingPositions([]);
     setImageLink(event.target.value);
+  }
+
+  // reset all state to initial state when logout
+  function initState() {
+    setImageLink("");
+    setBoundingPositions([]);
+    setRoute("signin");
+    setUser({});
   }
 
   function onButtonSubmit() {
@@ -78,7 +87,12 @@ function App() {
 
   return (
     <div className="App">
-      <Navigation onChangeRoute={onChangeRoute} route={route} />
+      {/* <TsParticles /> */}
+      <Navigation
+        onChangeRoute={onChangeRoute}
+        route={route}
+        initState={initState}
+      />
       {route === "home" ? (
         <div>
           <Logo />
