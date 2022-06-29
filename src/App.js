@@ -7,12 +7,7 @@ import FaceRecognition from "./components/FaceRecognition/FaceRecognition";
 import Signin from "./components/Signin/Signin";
 import Register from "./components/Register/Register";
 import { useState } from "react";
-import Clarifai from "clarifai";
 // import TsParticles from "./components/TsParticles/TsParticles";
-
-const app = new Clarifai.App({
-  apiKey: "583569cd329c42f9ba2d8c275778a27c",
-});
 
 function App() {
   const [imageLink, setImageLink] = useState("");
@@ -34,12 +29,14 @@ function App() {
   }
 
   function onButtonSubmit() {
-    app.models
-      .predict(
-        Clarifai.FACE_DETECT_MODEL,
-        // THE JPG
-        imageLink
-      )
+    fetch("http://localhost:3000/imageURL", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        imageLink: imageLink,
+      }),
+    })
+      .then((response) => response.json())
       .then((response) => {
         // get all position of face and restore the position data to boxes.
         const regions = response.outputs[0].data.regions;
