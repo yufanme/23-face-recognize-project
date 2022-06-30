@@ -29,13 +29,17 @@ function App() {
   }
 
   function onButtonSubmit() {
-    fetch("http://localhost:3000/imageURL", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        imageLink: imageLink,
-      }),
-    })
+    fetch(
+      "http://localhost:3000/imageURL" ||
+        "https://magic-brain-fanyu-backend.herokuapp.com/imageURL",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          imageLink: imageLink,
+        }),
+      }
+    )
       .then((response) => response.json())
       .then((response) => {
         // get all position of face and restore the position data to boxes.
@@ -50,13 +54,17 @@ function App() {
         setBoundingPositions(boxes);
         // add one entry to this user.
         if (response) {
-          fetch("http://localhost:3000/image", {
-            method: "put",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              id: user.id,
-            }),
-          })
+          fetch(
+            "http://localhost:3000/image" ||
+              "https://magic-brain-fanyu-backend.herokuapp.com/image",
+            {
+              method: "put",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                id: user.id,
+              }),
+            }
+          )
             .then((response) => response.json())
             .then((count) => {
               setUser({ ...user, entries: count });

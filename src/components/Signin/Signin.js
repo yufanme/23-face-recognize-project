@@ -15,14 +15,18 @@ const Signin = ({ onChangeRoute, loadUser }) => {
 
   function onSubmitClick(event) {
     event.preventDefault();
-    fetch("http://localhost:3000/signin", {
-      method: "post",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        email: emailBox,
-        password: passwordBox,
-      }),
-    })
+    fetch(
+      "http://localhost:3000/signin" ||
+        "https://magic-brain-fanyu-backend.herokuapp.com/signin",
+      {
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: emailBox,
+          password: passwordBox,
+        }),
+      }
+    )
       .then((response) => response.json())
       .then((user) => {
         if (user.id) {
