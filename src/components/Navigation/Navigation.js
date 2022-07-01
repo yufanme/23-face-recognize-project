@@ -1,6 +1,6 @@
 import React from "react";
 
-const Navigation = ({ onChangeRoute, route }) => {
+const Navigation = ({ onChangeRoute, route, initState }) => {
   return (
     <div>
       {route === "home" ? (
@@ -9,6 +9,7 @@ const Navigation = ({ onChangeRoute, route }) => {
             className="f3 link black underline pa3 pointer"
             onClick={() => {
               onChangeRoute("signin");
+              initState();
             }}
           >
             退出
