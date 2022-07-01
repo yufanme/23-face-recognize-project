@@ -22,8 +22,8 @@ const Register = ({ onChangeRoute, loadUser }) => {
     event.preventDefault();
     if (nameBox && emailBox && passwordBox) {
       fetch(
-        "http://localhost:3000/register" ||
-          "https://magic-brain-fanyu-backend.herokuapp.com/register",
+        // "http://localhost:3000/register" ||
+        "https://magic-brain-fanyu-backend.herokuapp.com/register",
         {
           method: "POST",
           body: JSON.stringify({

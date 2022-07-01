@@ -16,8 +16,8 @@ const Signin = ({ onChangeRoute, loadUser }) => {
   function onSubmitClick(event) {
     event.preventDefault();
     fetch(
-      "http://localhost:3000/signin" ||
-        "https://magic-brain-fanyu-backend.herokuapp.com/signin",
+      // "http://localhost:3000/signin" ||
+      "https://magic-brain-fanyu-backend.herokuapp.com/signin",
       {
         method: "post",
         headers: { "Content-Type": "application/json" },
